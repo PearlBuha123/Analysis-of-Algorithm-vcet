@@ -1,13 +1,5 @@
 #include <stdio.h>
 
-// Function to print the array
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
-
 // Function to perform Selection Sort
 void selectionSort(int arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
@@ -67,19 +59,28 @@ int main() {
     scanf("%d", &choice);
 
     printf("\nOriginal array: ");
-    printArray(arr, size);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 
     // Execute chosen sorting method
     switch (choice) {
         case 1:
             selectionSort(arr, size);
             printf("Sorted array (Selection Sort): ");
-            printArray(arr, size);
+            for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
             break;
         case 2:
             insertionSort(arr, size);
             printf("Sorted array (Insertion Sort): ");
-            printArray(arr, size);
+            for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
             break;
         default:
             printf("Invalid choice! Array was not sorted.\n");
