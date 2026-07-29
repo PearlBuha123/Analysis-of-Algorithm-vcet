@@ -1,97 +1,135 @@
 #include <stdio.h>
 
-// Function to perform Selection Sort
-void selectionSort(int arr[], int size) {
-    for (int i = 0; i < size - 1; i++) {
+// Function to print array
+void printArray(int arr[], int n)
+{
+    for(int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+// Insertion Sort with Steps
+void insertionSort(int array[], int size)
+{
+    int key, j;
+
+    printf("\nINSERTION SORT\n");
+
+    for(int i = 1; i < size; i++)
+    {
+        key = array[i];
+        j = i;
+
+        printf("\nPass %d:\n", i);
+        printf("Key = %d\n", key);
+
+        while(j > 0 && array[j-1] > key)
+        {
+            printf("  %d > %d, Shift %d to right\n",
+                   array[j-1], key, array[j-1]);
+
+            array[j] = array[j-1];
+            j--;
+
+            printf("  Current Array: ");
+            printArray(array, size);
+        }
+
+        array[j] = key;
+
+        printf("Insert %d at position %d\n", key, j);
+
+        printf("Array after Pass %d: ", i);
+        printArray(array, size);
+    }
+}
+
+// Selection Sort with Steps
+void selectionSort(int arr[], int n)
+{
+    int temp;
+
+    printf("\nSELECTION SORT\n");
+
+    for(int i = 0; i < n - 1; i++)
+    {
         int min_idx = i;
-        for (int j = i + 1; j < size; j++) {
-            if (arr[j] < arr[min_idx]) {
+
+        printf("\nPass %d:\n", i + 1);
+        printf("Current Minimum = %d\n", arr[min_idx]);
+
+        for(int j = i + 1; j < n; j++)
+        {
+            printf("Compare %d and %d\n", arr[min_idx], arr[j]);
+
+            if(arr[j] < arr[min_idx])
+            {
                 min_idx = j;
+                printf("New Minimum = %d\n", arr[min_idx]);
             }
         }
-        // Swap the found minimum element with the first element
-        int temp = arr[min_idx];
-        arr[min_idx] = arr[i];
-        arr[i] = temp;
-    }
-}
 
-// Function to perform Insertion Sort
-void insertionSort(int arr[], int size) {
-    for (int i = 1; i < size; i++) {
-        int key = arr[i];
-        int j = i - 1;
+        if(min_idx != i)
+        {
+            printf("Swap %d and %d\n", arr[i], arr[min_idx]);
 
-        // Move elements of arr[0..i-1] that are greater than key
-        // to one position ahead of their current position
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+            temp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = temp;
         }
-        arr[j + 1] = key;
+        else
+        {
+            printf("No Swap Needed\n");
+        }
+
+        printf("Array after Pass %d: ", i + 1);
+        printArray(arr, n);
     }
 }
 
-int main() {
-    int size, choice;
+int main()
+{
+    int n, choice;
 
-    // Get array size from user
-    printf("Enter the number of elements in the array: ");
-    if (scanf("%d", &size) != 1 || size <= 0) {
-        printf("Invalid array size.\n");
-        return 1;
-    }
+    printf("Enter size of array: ");
+    scanf("%d", &n);
 
-    int arr[size];
+    int arr[n];
 
-    // Get array elements from user
-    printf("Enter %d elements:\n", size);
-    for (int i = 0; i < size; i++) {
-        printf("Element %d: ", i + 1);
+    printf("Enter %d elements:\n", n);
+
+    for(int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-    }
 
-    // Select insertion or selection
-    printf("\nSelect Sorting Method:\n");
-    printf("1. Selection Sort\n");
-    printf("2. Insertion Sort\n");
+    printf("\nOriginal Array: ");
+    printArray(arr, n);
+
+    printf("\n1. Insertion Sort\n");
+    printf("2. Selection Sort\n");
     printf("3. Exit\n");
-    printf("Enter your choice (1 or 2 or 3): ");
+    printf("Enter Choice: ");
     scanf("%d", &choice);
 
-    printf("\nOriginal array: ");
-    for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-
-    // Execute chosen sorting method
-    switch (choice) {
+    switch(choice)
+    {
         case 1:
-            selectionSort(arr, size);
-            printf("Sorted array : ");
-            for (int i = 0; i < size; i++) {
-                printf("%d ", arr[i]);
-            }
-            printf("\n");
+            insertionSort(arr, n);
+            printf("\nFinal Sorted Array: ");
+            printArray(arr, n);
             break;
-        
+
         case 2:
-            insertionSort(arr, size);
-            printf("Sorted array : ");
-            for (int i = 0; i < size; i++) {
-                printf("%d ", arr[i]);
-            }
-            printf("\n");
+            selectionSort(arr, n);
+            printf("\nFinal Sorted Array: ");
+            printArray(arr, n);
             break;
 
         case 3:
             printf("Exiting...\n");
-            return 0;
+            break;
 
         default:
-            printf("Invalid choice!\n");
-            return 1;
+            printf("Invalid Choice!\n");
     }
 
     return 0;
