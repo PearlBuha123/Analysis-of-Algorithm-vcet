@@ -4,23 +4,15 @@
 void selectionSort(int arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
         int min_idx = i;
-        for (int j = i + 1; j < size; j++) 
-        {
+        for (int j = i + 1; j < size; j++) {
             if (arr[j] < arr[min_idx]) {
                 min_idx = j;
             }
         }
         // Swap the found minimum element with the first element
-        
         int temp = arr[min_idx];
         arr[min_idx] = arr[i];
         arr[i] = temp;
-        printf("Sorted array after swapping : ");
-        for (int i = 0; i < size; i++) {
-            printf("%d ", arr[i]);
-        }
-    
-    printf("\n");
     }
 }
 
@@ -38,7 +30,6 @@ void insertionSort(int arr[], int size) {
         }
         arr[j + 1] = key;
     }
-    (printf("\n"));
 }
 
 int main() {
@@ -60,7 +51,7 @@ int main() {
         scanf("%d", &arr[i]);
     }
 
-    //select insertion or selection
+    // Select insertion or selection
     printf("\nSelect Sorting Method:\n");
     printf("1. Selection Sort\n");
     printf("2. Insertion Sort\n");
@@ -78,25 +69,30 @@ int main() {
     switch (choice) {
         case 1:
             selectionSort(arr, size);
-            printf("Sorted array (Selection Sort): ");
+            printf("Sorted array : ");
             for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
             break;
         
         case 2:
             insertionSort(arr, size);
-            printf("Sorted array (Insertion Sort): ");
+            printf("Sorted array : ");
             for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
             break;
+
         case 3:
-            printf("exiting");
+            printf("Exiting...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice!\n");
             return 1;
+    }
 
     return 0;
-}
 }
